@@ -10,18 +10,26 @@
       display: none;
     }
     .installApp_visible {
+      position: absolute;
       display: block;
     }
     .videoPreview {
-      display: block;
+      position: absolute;
+      display: none;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100vh;
+    }
+    .videoPreview_visible {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <button class="installApp">Install App</button>
   <button class="cameraButton">Проверить доступ к камере</button>
   <video class="videoPreview" muted></video>
+  <button class="installApp">Install App</button>
   <script>
    if ('serviceWorker' in navigator) {
      window.addEventListener('load', () => {
@@ -72,6 +80,7 @@
       navigator.mediaDevices.getUserMedia({ video: true }).then(
         localMediaStream => {
           const element = document.querySelector('.videoPreview');
+          element.classList.add('videoPreview_visible');
           
           try {
                 const streamUrl = URL.createObjectURL(localMediaStream);
