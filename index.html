@@ -68,7 +68,7 @@
       navigator.mediaDevices.getUserMedia({ video: true }).then(
         localMediaStream => {
           const element = document.querySelector('.videoPreview');
-          element.srcObject = props.stream;
+          element.srcObject = localMediaStream;
           element.play();
         }
       );
