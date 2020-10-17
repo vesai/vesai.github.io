@@ -118,7 +118,8 @@
     } else {
       window.addEventListener('beforeinstallprompt', (e) => {
         // Prevent the mini-infobar from appearing on mobile
-        e.preventDefault();
+//         e.preventDefault();
+        return;
         
         if (installAppShown) {
           return;
