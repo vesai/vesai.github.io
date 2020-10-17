@@ -118,8 +118,7 @@
     } else {
       window.addEventListener('beforeinstallprompt', (e) => {
         // Prevent the mini-infobar from appearing on mobile
-//         e.preventDefault();
-        return;
+        e.preventDefault();
         
         if (installAppShown) {
           return;
@@ -131,6 +130,9 @@
         // Update UI notify the user they can install the PWA
         console.log(e);
         button.classList.add('installApp_visible');
+        window.addEventListener('appinstalled', (evt) => {
+          alert('III');
+        });
         button.addEventListener('click', () => {
           if(deferredPrompt !== undefined) {
             // The user has had a postive interaction with our app and Chrome
