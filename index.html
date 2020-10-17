@@ -59,6 +59,16 @@
     .howToIphone_visible {
       display: block;
     }
+    
+    .howToIphoneClose {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .howToIphoneClose_visible {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -66,6 +76,7 @@
   <video class="videoPreview" playsinline muted></video>
   <button class="installApp">Install App</button>
   <img class="howToIphone">
+  <button class="howToIphoneClose">X</button>
   <script>
    if ('serviceWorker' in navigator) {
      window.addEventListener('load', () => {
@@ -94,8 +105,16 @@
       button.classList.add('installApp_visible');
       button.addEventListener('click', () => {
         const hti = document.querySelector('.howToIphone');
+        const htiButton = document.querySelector('.howToIphoneClose');
+        
         hti.classList.add('howToIphone_visible');
+        htiButton.classList.add('howToIphoneClose_visible');
         hti.src = '/hti.jpg';
+        htiButton.addEventListener('click', () => {
+          hti.classList.remove('howToIphone_visible');
+          button.classList.remove('installApp_visible');
+          htiButton.classList.add('howToIphoneClose_visible');
+        })
       });
     } else {
       window.addEventListener('beforeinstallprompt', (e) => {
