@@ -108,10 +108,10 @@
         hti.classList.add('howToIphone_visible');
         htiButton.classList.add('howToIphoneClose_visible');
         hti.src = '/hti.jpg';
+        button.classList.remove('installApp_visible');
         htiButton.addEventListener('click', () => {
           hti.classList.remove('howToIphone_visible');
-          button.classList.remove('installApp_visible');
-          htiButton.classList.add('howToIphoneClose_visible');
+          htiButton.classList.remove('howToIphoneClose_visible');
         })
       });
     } else {
@@ -127,11 +127,11 @@
             // The user has had a postive interaction with our app and Chrome
             // has tried to prompt previously, so let's show the prompt.
             deferredPrompt.prompt();
+            
+            button.classList.remove('installApp_visible');
 
             // Follow what the user has done with the prompt.
             deferredPrompt.userChoice.then(function(choiceResult) {
-
-              button.classList.remove('installApp_visible');
 
               if(choiceResult.outcome == 'dismissed') {
                 console.log('User cancelled home screen install');
