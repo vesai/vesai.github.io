@@ -6,7 +6,7 @@
   "background_color": "#000",
   "theme_color": "#000",
   "description": "A simply app!",
-  "categories": ["entertainment"]
+  "categories": ["entertainment"],
   "icons": [{
     "src": "/a.png",
     "sizes": "400x400",
