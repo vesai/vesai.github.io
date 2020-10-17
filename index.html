@@ -16,7 +16,8 @@
 </head>
 <body>
   <button class="installApp">Install App</button>
-  TEST
+  <button class="cameraButton">Проверить доступ к камере</button>
+  <video className="videoPreview"></video>
   <script>
    if ('serviceWorker' in navigator) {
      window.addEventListener('load', () => {
@@ -61,6 +62,16 @@
           });
         }
       });
+    });
+    
+    document.querySelector('.cameraButton').addEventListener('click', () => {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(
+        localMediaStream => {
+          const element = document.querySelector('.videoPreview');
+          element.srcObject = props.stream;
+          element.play();
+        }
+      );
     });
   </script>
 </body>
