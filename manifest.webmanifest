@@ -1,1 +1,6 @@
-{}
+{
+  "name": "My app",
+  "short_name": "mapp",
+  "start_url": ".",
+  "display": "standalone"
+}
