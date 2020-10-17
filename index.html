@@ -98,6 +98,7 @@
     );
     
     const button = document.querySelector('.installApp');
+    var installAppShown = false;
     
     if (isSafari && navigator.standalone === false) {
       button.classList.add('installApp_visible');
@@ -118,6 +119,12 @@
       window.addEventListener('beforeinstallprompt', (e) => {
         // Prevent the mini-infobar from appearing on mobile
         e.preventDefault();
+        
+        if (installAppShown) {
+          return;
+        }
+        
+        installAppShown = true;
         // Stash the event so it can be triggered later.
         deferredPrompt = e;
         // Update UI notify the user they can install the PWA
