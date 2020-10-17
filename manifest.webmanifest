@@ -3,7 +3,7 @@
   "short_name": "mapp",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#fff",
+  "background_color": "#000",
   "description": "A simply app!",
   "icons": [{
     "src": "/a.png",
