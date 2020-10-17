@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test</title>
   <link rel="manifest" href="/manifest.webmanifest">
+  <style>
+    .installApp {
+      display: none;
+    }
+    .installApp_visible {
+      display: block;
+    }
+  </style>
 </head>
 <body>
+  <button class="installApp">Install App</button>
   TEST
   <script>
    if ('serviceWorker' in navigator) {
@@ -27,7 +36,31 @@
       // Stash the event so it can be triggered later.
       deferredPrompt = e;
       // Update UI notify the user they can install the PWA
-      alert('WOW');
+      const button = document.querySelector('.installApp');
+      button.classList.add('installApp_visible);
+      button.addEventListener('click', () => {
+        if(deferredPrompt !== undefined) {
+          // The user has had a postive interaction with our app and Chrome
+          // has tried to prompt previously, so let's show the prompt.
+          deferredPrompt.prompt();
+
+          // Follow what the user has done with the prompt.
+          deferredPrompt.userChoice.then(function(choiceResult) {
+
+            console.log(choiceResult.outcome);
+
+            if(choiceResult.outcome == 'dismissed') {
+              console.log('User cancelled home screen install');
+            }
+            else {
+              console.log('User added to home screen');
+            }
+
+            // We no longer need the prompt.  Clear it up.
+            deferredPrompt = null;
+          });
+        }
+      });
     });
   </script>
 </body>
