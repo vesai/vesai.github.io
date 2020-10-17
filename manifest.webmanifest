@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
-  "description": "A simply readable Hacker News app.",
+  "description": "A simply app!",
   "icons": [{
     "src": "/a.png",
     "sizes": "144x144",
