@@ -24,6 +24,9 @@
     .videoPreview_visible {
       display: block;
     }
+    .cameraButton_hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -76,9 +79,11 @@
       });
     });
     
-    document.querySelector('.cameraButton').addEventListener('click', () => {
+    const cameraButton = document.querySelector('.cameraButton');
+    cameraButton.addEventListener('click', () => {
       navigator.mediaDevices.getUserMedia({ video: true }).then(
         localMediaStream => {
+          cameraButton.classList.add('cameraButton_hidden');
           const element = document.querySelector('.videoPreview');
           element.classList.add('videoPreview_visible');
           
