@@ -73,8 +73,7 @@
     const button = document.querySelector('.installApp');
     var isIOSSafari = (isIPhone || isIPad) && isSafari;
     
-    if (isIOSSafari) {
-      //    navigator.standalone
+    if (isIOSSafari && navigator.standalone) {
       button.classList.add('installApp_visible');
       button.addEventListener('click', () => {
         const hti = document.querySelector('.howToIphone');
