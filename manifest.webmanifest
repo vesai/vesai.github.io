@@ -9,8 +9,5 @@
     "src": "/a.png",
     "sizes": "400x400",
     "type": "image/png"
-  }],
-  "related_applications": [{
-    "platform": "web"
   }]
 }
