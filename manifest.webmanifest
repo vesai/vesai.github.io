@@ -2,5 +2,10 @@
   "name": "My app",
   "short_name": "mapp",
   "start_url": ".",
-  "display": "standalone"
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A simply readable Hacker News app.",
+  "icons": [{
+    "src": "/a.png"
+  }]
 }
