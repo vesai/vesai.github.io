@@ -131,7 +131,7 @@
         console.log(e);
         button.classList.add('installApp_visible');
         window.addEventListener('appinstalled', (evt) => {
-          alert('Приложение установлено, вы можете запустить его с главного экрана');
+          alert('Приложение установлено, вы можете запустить его с главного экрана или из списка приложений');
         });
         button.addEventListener('click', () => {
           if(deferredPrompt !== undefined) {
