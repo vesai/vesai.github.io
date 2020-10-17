@@ -90,8 +90,6 @@
    }
     
     var deferredPrompt;
-    var isIPhone = navigator.platform === "iPhone";
-    var isIPad = navigator.platform === "iPad";
     var isSafari = (
       navigator.userAgent.indexOf("YaBrowser") === -1 &&
       navigator.userAgent.indexOf("Firefox") === -1 &&
@@ -100,9 +98,8 @@
     );
     
     const button = document.querySelector('.installApp');
-    var isIOSSafari = (isIPhone || isIPad) && isSafari;
     
-    if (isIOSSafari && navigator.standalone) {
+    if (isSafari && navigator.standalone === false) {
       button.classList.add('installApp_visible');
       button.addEventListener('click', () => {
         const hti = document.querySelector('.howToIphone');
