@@ -30,12 +30,25 @@
     .cameraButton_hidden {
       display: none;
     }
+    .howToIphone {
+      position: absolute;
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .howToIphone_visible {
+      display: block;
+    }
   </style>
 </head>
 <body>
   <button class="cameraButton">Проверить доступ к камере</button>
   <video class="videoPreview" playsinline muted></video>
   <button class="installApp">Install App</button>
+  <img class="howToIphone">
   <script>
    if ('serviceWorker' in navigator) {
      window.addEventListener('load', () => {
@@ -48,39 +61,59 @@
    }
     
     var deferredPrompt;
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent the mini-infobar from appearing on mobile
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      deferredPrompt = e;
-      // Update UI notify the user they can install the PWA
-      const button = document.querySelector('.installApp');
+    var isIPhone = navigator.platform === "iPhone";
+    var isIPad = navigator.platform === "iPad";
+    var isSafari = (
+      navigator.userAgent.indexOf("YaBrowser") === -1 &&
+      navigator.userAgent.indexOf("Firefox") === -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1 &&
+      navigator.userAgent.indexOf("CriOS") === -1
+    );
+    
+    const button = document.querySelector('.installApp');
+    var isIOSSafari = (isIPhone || isIPad) && isSafari;
+    
+    if (isIOSSafari) {
+      //    navigator.standalone
       button.classList.add('installApp_visible');
       button.addEventListener('click', () => {
-        if(deferredPrompt !== undefined) {
-          // The user has had a postive interaction with our app and Chrome
-          // has tried to prompt previously, so let's show the prompt.
-          deferredPrompt.prompt();
-
-          // Follow what the user has done with the prompt.
-          deferredPrompt.userChoice.then(function(choiceResult) {
-
-            button.classList.remove('installApp_visible');
-
-            if(choiceResult.outcome == 'dismissed') {
-              console.log('User cancelled home screen install');
-            }
-            else {
-              console.log('User added to home screen');
-            }
-
-            // We no longer need the prompt.  Clear it up.
-            deferredPrompt = null;
-          });
-        }
+        const hti = document.querySelector('.howToIphone');
+        hti.classNames.add('howToIphone_visible');
+        hti.src = '/hti.jpg';
       });
-    });
+    } else {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI notify the user they can install the PWA
+        button.classList.add('installApp_visible');
+        button.addEventListener('click', () => {
+          if(deferredPrompt !== undefined) {
+            // The user has had a postive interaction with our app and Chrome
+            // has tried to prompt previously, so let's show the prompt.
+            deferredPrompt.prompt();
+
+            // Follow what the user has done with the prompt.
+            deferredPrompt.userChoice.then(function(choiceResult) {
+
+              button.classList.remove('installApp_visible');
+
+              if(choiceResult.outcome == 'dismissed') {
+                console.log('User cancelled home screen install');
+              }
+              else {
+                console.log('User added to home screen');
+              }
+
+              // We no longer need the prompt.  Clear it up.
+              deferredPrompt = null;
+            });
+          }
+        });
+      }); 
+    }
     
     const cameraButton = document.querySelector('.cameraButton');
     cameraButton.addEventListener('click', () => {
