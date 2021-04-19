@@ -26,8 +26,8 @@
         x.json().then(xx => {
           document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS DATA: ' + xx + '<br>';
           document.querySelector('#yy').src = audios[1];
+          document.querySelector('#yy').play();
         });
-        document.querySelector('#yy').play();
       }, () => {
           document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'FAIL FETCH<br>';
       });
