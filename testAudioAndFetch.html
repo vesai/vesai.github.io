@@ -21,16 +21,18 @@
 
     document.querySelector('#yy').addEventListener('ended', () => {
       document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'ENDED<br>';
-      fetch('/test.json').then((x) => {
-        document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS FETCH<br>';
-        x.json().then(xx => {
-          document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS DATA: ' + xx + '<br>';
-          document.querySelector('#yy').src = audios[1];
-          document.querySelector('#yy').play();
+      setTimeout(() => {
+        fetch('/test.json').then((x) => {
+          document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS FETCH<br>';
+          x.json().then(xx => {
+            document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS DATA: ' + xx + '<br>';
+            document.querySelector('#yy').src = audios[1];
+            document.querySelector('#yy').play();
+          });
+        }, () => {
+            document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'FAIL FETCH<br>';
         });
-      }, () => {
-          document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'FAIL FETCH<br>';
-      });
+      }, 3000);
     });
           document.querySelector('#yy').src = audios[0];
     document.querySelector('#zz').addEventListener('click', () => {
