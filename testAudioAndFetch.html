@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <div id="xx"></div>
+  <audio id='yy'></audio>
+  <button id='zz'>Play x</button>
+  <script>
+     const audios = [
+      'http://cld3097web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
+      'http://cld3097web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.02.mp3'
+    ];
+
+    // setInterval(() => {
+    //   document.querySelector('#xx').innerHTML += (new Date()).toISOString() + '<br>';
+    // }, 3000);
+
+    document.querySelector('#yy').addEventListener('ended', () => {
+      document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'ENDED<br>';
+      fetch('/test.json').then(() => {
+        document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'SUCCESS FETCH<br>';
+            document.querySelector('#yy').src = audios[1];
+        document.querySelector('#yy').play();
+      }, () => {
+          document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'FAIL FETCH<br>';
+      });
+    });
+    document.querySelector('#zz').addEventListener('click', () => {
+      document.querySelector('#yy').src = audios[0];
+      document.querySelector('#yy').play();
+    });
+  </script>
+</body>
+</html>
