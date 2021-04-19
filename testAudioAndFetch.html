@@ -29,8 +29,8 @@
           document.querySelector('#xx').innerHTML += (new Date()).toISOString() + 'FAIL FETCH<br>';
       });
     });
+          document.querySelector('#yy').src = audios[0];
     document.querySelector('#zz').addEventListener('click', () => {
-      document.querySelector('#yy').src = audios[0];
       document.querySelector('#yy').play();
     });
   </script>
